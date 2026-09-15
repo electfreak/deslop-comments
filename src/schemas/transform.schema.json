@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decisions"],
+  "properties": {
+    "decisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/decision"
+      }
+    }
+  },
+  "$defs": {
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "action",
+        "propositions",
+        "surviving_propositions",
+        "replacement",
+        "review_reason"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "DELETE",
+            "REWRITE",
+            "KEEP",
+            "REVIEW"
+          ]
+        },
+        "propositions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proposition"
+          }
+        },
+        "surviving_propositions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "replacement": {
+          "type": ["string", "null"],
+          "description": "The comment body for REWRITE, without comment markers. Do not wrap it to a line width: the tool re-wraps to the width the file already uses, and a break left mid-sentence survives as one. Use \\n only where a break is meant, and \\n\\n between paragraphs."
+        },
+        "review_reason": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "proposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "text",
+        "decision",
+        "reason",
+        "depends_on"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "KEEP",
+            "DELETE"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "depends_on": {
+          "type": ["string", "null"]
+        }
+      }
+    }
+  }
+}

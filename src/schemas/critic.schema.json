@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decisions"],
+  "properties": {
+    "decisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/decision"
+      }
+    }
+  },
+  "$defs": {
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "action",
+        "replacement",
+        "removed_information",
+        "reason"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "ACCEPT",
+            "DELETE",
+            "REWRITE",
+            "REVIEW"
+          ]
+        },
+        "replacement": {
+          "type": ["string", "null"],
+          "description": "The comment body for REWRITE, without comment markers. Do not wrap it to a line width: the tool re-wraps to the width the file already uses, and a break left mid-sentence survives as one. Use \\n only where a break is meant, and \\n\\n between paragraphs."
+        },
+        "removed_information": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reason": {
+          "type": ["string", "null"]
+        }
+      }
+    }
+  }
+}

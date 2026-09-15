@@ -1,0 +1,16 @@
+{
+  "name": "deslop-comments",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.125.0",
+    "@tree-sitter-grammars/tree-sitter-svelte": "^1.0.2",
+    "tree-sitter-wasms": "^0.1.13",
+    "web-tree-sitter": "0.25.10"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "@types/node": "^22",
+    "typescript": "^5"
+  }
+}
